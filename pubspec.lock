@@ -188,10 +188,11 @@ packages:
   dxf:
     dependency: "direct main"
     description:
-      name: dxf
-      sha256: a7f8e85cf13999d06c5636f631571b8bbba98182714afbe59b2791f4adef5f8a
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: e49c454f7b141b31007f4ef64457c141eb18ee05
+      url: "https://github.com/thobiassilva/dxf.git"
+    source: git
     version: "3.1.1"
   fake_async:
     dependency: transitive

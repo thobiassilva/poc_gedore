@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:dxf/dxf.dart';
 import 'package:flutter/material.dart';
@@ -124,6 +125,10 @@ class FerramentaPainter extends CustomPainter {
     if (entity is AcDbArc) {
       drawArc(entity, ajust, canvas, paint);
     }
+
+    if (entity is AcDbSpline) {
+      drawSpline(entity, ajust, canvas, paint);
+    }
   }
 
   void drawHitbox(AcDbEntity entity, Offset ajust, Canvas canvas) {
@@ -244,6 +249,17 @@ class FerramentaPainter extends CustomPainter {
     // canvas.translate(-center.dx, -center.dy);
     drawFunction();
     canvas.restore();
+  }
+
+  void drawSpline(AcDbSpline entity, Offset ajust, Canvas canvas, Paint paint) {
+    final spline = CatmullRomSpline(
+        entity.vertices.map((e) => Offset(e[0], -e[1]) + ajust).toList());
+
+    canvas.drawPoints(
+      PointMode.points,
+      spline.generateSamples().map((e) => e.value).toList(),
+      paint,
+    );
   }
 
   void drawLine(AcDbLine entity, Offset ajust, Canvas canvas, Paint paint) {
